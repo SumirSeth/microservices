@@ -1,19 +1,19 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+    "github.com/gin-gonic/gin"
+    
+)
 
 func main() {
-    r := gin.Default()
+    router := gin.Default()
 
-    r.GET("/healthy", func(c *gin.Context) {
+    router.GET("/healthy", func(c *gin.Context) {
         c.JSON(200, gin.H{
             "success": true,
         })
     })
+    CategoryRoutes(router)
 
-    if err := r.Run(":8080"); err != nil {
-        panic(err)
-    }
-
-    r.Run(":8080")
+    router.Run(":8080")
 }

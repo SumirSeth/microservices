@@ -4,14 +4,15 @@ import (
 	"log"
 
 	"github.com/sumirseth/microservices/internal/entities"
+	"github.com/sumirseth/microservices/internal/repositories"
 )
 
 type createCategoryUseCase struct {
-	//
+	reposository repositories.ICategoryRepository
 }
 
-func NewCreateCategoryUseCase() *createCategoryUseCase {
-	return &createCategoryUseCase{}
+func NewCreateCategoryUseCase(reposository repositories.ICategoryRepository) *createCategoryUseCase {
+	return &createCategoryUseCase{reposository}
 }
 
 func (u *createCategoryUseCase) Execute(name string) error {
@@ -20,7 +21,12 @@ func (u *createCategoryUseCase) Execute(name string) error {
 		return err
 	}
 
-	log.Println(category)
+	err = u.reposository.Save(category)
+
+	if err != nil {
+		log.Println(err)
+		return err
+	}
 
 	return nil
 }

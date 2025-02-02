@@ -1,1 +1,12 @@
-GET http://localhost:8080/healthy
+# GET http://localhost:8080/healthy
+
+
+
+# POST http://localhost:8080/categories
+# Content-Type: application/json
+
+# {
+#     "name": "test cat"
+# }
+
+GET http://localhost:8080/categories
